@@ -1,4 +1,4 @@
-package pkg06_captura6;
+package pkg07_captura7;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
