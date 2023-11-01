@@ -26,5 +26,35 @@ public class Main {
         {
             System.out.println( cadena2.charAt(i) );
         }
+        System.out.println("El primer char de nuevo es "+nuevo.charAt(0));
+        System.out.println("El ultimo char de nuevo es "+nuevo.charAt(nuevo.length()-1));
+        
+        //obtener las versiones en mayusc. y minusc. de un string
+        String str7 = "Gerardo Josue Portillo";
+        System.out.println("La cadena str7 en mayusculas: "+str7.toUpperCase());
+        System.out.println("La cadena str7 en minusculas: "+str7.toLowerCase());
+        System.out.println("Contenido de str7: "+str7);
+        //sobre escribir a str7 con su version en mayusculas
+        str7 = str7.toUpperCase();
+        System.out.println("Contenido de str7: "+str7);
+        
+        //trim() elimina los espacios iniciales y finales de un String
+        String fruta = "          MANZANA VERDE        ";
+        System.out.println("Contenido de fruta: "+fruta+".");
+        System.out.println("Longitud de fruta: "+fruta.length());
+        //imprimir una version de fruta sin relleno de espacios
+        System.out.println("fruta con trim: "+fruta.trim()+".");
+        System.out.println("Longitud de fruta con trim: "+fruta.trim().length());
+        System.out.println("contenido de fruta: "+fruta+".");
+        //sobreescribir el contenido de fruta a su version sin espacios de relleno
+        fruta = fruta.trim();
+        System.out.println("contenido de fruta: "+fruta+".");
+        
+        String verdura = "    TOMATE     ROJO    ";
+        //imprimir la variable verdura sin espacios iniciales y finales,
+        //toda en minusculas sin alterar a la variable verdura.
+        System.out.println( verdura.trim().toLowerCase() );
+        
+        
     }    
 }
