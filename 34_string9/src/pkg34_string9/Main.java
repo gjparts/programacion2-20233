@@ -1,4 +1,5 @@
 package pkg34_string9;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         /*substring (substr)
@@ -27,8 +28,30 @@ public class Main {
         Municipio: 01
         Año de asentamiento: 1982
         Correlativo: 01055*/
+        Scanner s = new Scanner(System.in);
+        System.out.print("Digitar DNI: ");
+        String dni = s.nextLine();
         
+        //eliminar guiones, espacios y relleno
+        dni = dni.replace("-", "").replace(" ", "").replace("_", "");
         
+        //validacion
+        if( dni.length() == 13 ){
+            System.out.println("Resultado:");
+            String depto, muni, correlativo;
+            int anio;
+            depto = dni.substring(0,2);
+            muni = dni.substring(2,4);
+            anio = Integer.parseInt( dni.substring(4,8) );
+            correlativo = dni.substring(8,13);
+            
+            System.out.println("Departamento: "+depto);
+            System.out.println("Municipio: "+muni);
+            System.out.println("Año: "+anio);
+            System.out.println("Correlativo: "+correlativo);
+        }
+        else
+            System.out.println("DNI no es valido, debe tener 13 caracteres.");
     }
     
 }
