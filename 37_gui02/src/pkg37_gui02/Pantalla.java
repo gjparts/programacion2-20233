@@ -9,6 +9,7 @@ package pkg37_gui02;
  *
  * @author Gerardo Portillo
  */
+import javax.swing.JOptionPane;
 public class Pantalla extends javax.swing.JFrame {
 
     /**
@@ -120,12 +121,20 @@ public class Pantalla extends javax.swing.JFrame {
     private void botonSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSumarActionPerformed
         //obtener lo digitado en las cajas de texto
         //y colocarlo en variables de trabajo
-        double num1, num2, suma;
-        num1 = Double.parseDouble( caja1.getText() );
-        num2 = Double.parseDouble( caja2.getText() );
-        suma = num1+num2;
-        //colocar el resultado en la caja respectiva
-        resultado.setText( String.valueOf( suma ) );
+        try{
+            //codigo propenso a fallar
+            double num1, num2, suma;
+            num1 = Double.parseDouble( caja1.getText() );
+            num2 = Double.parseDouble( caja2.getText() );
+            suma = num1+num2;
+            //colocar el resultado en la caja respectiva
+            resultado.setText( String.valueOf( suma ) );
+        }catch(Exception ex){
+            //codigo a ejecutar si hay falla
+            JOptionPane.showMessageDialog(this, "Revise los valores digitados.");
+            resultado.setText("ERROR");
+        }
+        
     }//GEN-LAST:event_botonSumarActionPerformed
 
     /**
