@@ -9,6 +9,8 @@ package pkg40_gui05;
  *
  * @author Gerardo Portillo
  */
+import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 public class Ventana extends javax.swing.JFrame {
 
     /**
@@ -29,6 +31,9 @@ public class Ventana extends javax.swing.JFrame {
 
         check1 = new javax.swing.JCheckBox();
         label1 = new javax.swing.JLabel();
+        combo1 = new javax.swing.JComboBox<>();
+        label2 = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -48,6 +53,20 @@ public class Ventana extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         label1.setText("jLabel1");
 
+        combo1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Uno", "Dos", "Tres", "Asi", "Otro", "Algo", "Fin" }));
+        combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo1ActionPerformed(evt);
+            }
+        });
+
+        label2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        label2.setText("jLabel1");
+
+        label3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        label3.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,7 +76,14 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(check1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2)
+                    .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label3))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,7 +92,13 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(check1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(label2)
+                .addGap(18, 18, 18)
+                .addComponent(label3)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,7 +115,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         check1ActionPerformed(null);
+        //llenar combo1
+        DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
+        modelo1.addElement("Guatemala");
+        modelo1.addElement("Honduras");
+        modelo1.addElement("El Salvador");
+        modelo1.addElement("Nicaragua");
+        modelo1.addElement("Costa Rica");
+        //asignar modelo1 a combo1
+        combo1.setModel(modelo1);
     }//GEN-LAST:event_formWindowOpened
+
+    private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
+        //se ha cambiado el valor del combobox
+        //extraemos la posicion y valor del elemento seleccionado
+        label2.setText( String.valueOf( combo1.getSelectedIndex() ) );
+        label3.setText( combo1.getSelectedItem().toString() );
+        
+        //si el pais es Honduras que coloree el fondo
+        if( combo1.getSelectedItem().toString().equalsIgnoreCase("honduras") == true )
+            this.getContentPane().setBackground( Color.CYAN );
+        else
+            this.getContentPane().setBackground( null );
+    }//GEN-LAST:event_combo1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,6 +176,9 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox check1;
+    private javax.swing.JComboBox<String> combo1;
     private javax.swing.JLabel label1;
+    private javax.swing.JLabel label2;
+    private javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }
