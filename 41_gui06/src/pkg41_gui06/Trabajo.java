@@ -9,6 +9,8 @@ package pkg41_gui06;
  *
  * @author Gerardo Portillo
  */
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 public class Trabajo extends javax.swing.JFrame {
 
     /**
@@ -78,6 +80,11 @@ public class Trabajo extends javax.swing.JFrame {
 
         enviar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         enviar.setText("Enviar");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,11 +161,47 @@ public class Trabajo extends javax.swing.JFrame {
         //DRY: dont repeat yourself
         empresa.setVisible(tieneTrabajo.isSelected());
         lblEmpresa.setVisible(tieneTrabajo.isSelected());
+        
+        //si oculta la caja de empresa entonces vaciar su contenido
+        if( tieneTrabajo.isSelected() == false ) empresa.setText("");
     }//GEN-LAST:event_tieneTrabajoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tieneTrabajoActionPerformed(null);
+        
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        modelo.addElement("");
+        modelo.addElement("Guatemala");
+        modelo.addElement("Honduras");
+        modelo.addElement("El Salvador");
+        pais.setModel(modelo);
     }//GEN-LAST:event_formWindowOpened
+
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        try {
+            if( nombre.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Debe poner el nombre");
+                return; //termina con este metodo
+            }
+            if( Integer.parseInt( edad.getText() ) < 18 ){
+                JOptionPane.showMessageDialog(this, "Edad debe ser mayor a 18");
+                return; //termina con este metodo
+            }
+            if( pais.getSelectedItem().toString().equals("") == true ){
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un pais");
+                return; //termina con este metodo
+            }
+            //si el lugar de trabajo esta marcado entonces validar que lo llenaron
+            if( tieneTrabajo.isSelected() == true && empresa.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Debe poner la empresa");
+                return; //termina con este metodo
+            }
+            //si llego aqui es porque todo esta bien
+            JOptionPane.showMessageDialog(this, "Informacion enviada correctamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Revise que los datos sean correctos");
+        }
+    }//GEN-LAST:event_enviarActionPerformed
 
     /**
      * @param args the command line arguments
