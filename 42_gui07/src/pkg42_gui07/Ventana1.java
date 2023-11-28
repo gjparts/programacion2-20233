@@ -5,12 +5,35 @@
  */
 package pkg42_gui07;
 
+import java.awt.Color;
+
 /**
  *
  * @author Gerardo Portillo
  */
+import javax.swing.JOptionPane;
 public class Ventana1 extends javax.swing.JFrame {
 
+    //metodo para cambiar el color de fondo
+    //de acuerdo al RadioButton seleccionado
+    public void cambioColor(){
+        try {
+            //el color de fondo dependera del actionCommand
+            //del elemento seleccionado en el buttonGroup
+            if( color.getSelection().getActionCommand().equals("red") )
+                this.getContentPane().setBackground(Color.red);
+            
+            if( color.getSelection().getActionCommand().equals("blue") )
+                this.getContentPane().setBackground(Color.blue);
+            
+            if( color.getSelection().getActionCommand().equals("green") )
+                this.getContentPane().setBackground(Color.green);
+        } catch (Exception e) {
+            //si algo sale mal regresa el color a default
+            this.getContentPane().setBackground(null);
+        }
+    }
+    
     /**
      * Creates new form Ventana1
      */
@@ -29,73 +52,134 @@ public class Ventana1 extends javax.swing.JFrame {
 
         color = new javax.swing.ButtonGroup();
         genero = new javax.swing.ButtonGroup();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        rojo = new javax.swing.JRadioButton();
+        verde = new javax.swing.JRadioButton();
+        azul = new javax.swing.JRadioButton();
+        masculino = new javax.swing.JRadioButton();
+        femenino = new javax.swing.JRadioButton();
+        botonPrueba = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerardo 200710510115");
 
-        color.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jRadioButton1.setText("Rojo");
-        jRadioButton1.setToolTipText("");
+        color.add(rojo);
+        rojo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        rojo.setText("Rojo");
+        rojo.setToolTipText("");
+        rojo.setActionCommand("red");
+        rojo.setOpaque(false);
+        rojo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rojoStateChanged(evt);
+            }
+        });
 
-        color.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jRadioButton2.setText("Verde");
+        color.add(verde);
+        verde.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        verde.setText("Verde");
+        verde.setActionCommand("green");
+        verde.setOpaque(false);
+        verde.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                verdeStateChanged(evt);
+            }
+        });
 
-        color.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jRadioButton3.setText("Azul");
+        color.add(azul);
+        azul.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        azul.setText("Azul");
+        azul.setActionCommand("blue");
+        azul.setOpaque(false);
+        azul.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                azulStateChanged(evt);
+            }
+        });
 
-        genero.add(jRadioButton4);
-        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jRadioButton4.setText("Masculino");
+        genero.add(masculino);
+        masculino.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        masculino.setText("Masculino");
 
-        genero.add(jRadioButton5);
-        jRadioButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jRadioButton5.setText("Femenino");
+        genero.add(femenino);
+        femenino.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        femenino.setText("Femenino");
+
+        botonPrueba.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        botonPrueba.setText("Prueba");
+        botonPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPruebaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton5))
+                        .addGap(17, 17, 17)
+                        .addComponent(rojo)
+                        .addGap(18, 18, 18)
+                        .addComponent(verde)
+                        .addGap(18, 18, 18)
+                        .addComponent(azul))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton3)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)
+                        .addComponent(masculino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(femenino))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(botonPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
-                .addGap(67, 67, 67)
+                    .addComponent(rojo)
+                    .addComponent(verde)
+                    .addComponent(azul))
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addComponent(masculino)
+                    .addComponent(femenino))
+                .addGap(30, 30, 30)
+                .addComponent(botonPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rojoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rojoStateChanged
+        cambioColor();
+    }//GEN-LAST:event_rojoStateChanged
+
+    private void verdeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_verdeStateChanged
+        cambioColor();
+    }//GEN-LAST:event_verdeStateChanged
+
+    private void azulStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_azulStateChanged
+        cambioColor();
+    }//GEN-LAST:event_azulStateChanged
+
+    private void botonPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPruebaActionPerformed
+        if( masculino.isSelected() == false && femenino.isSelected() == false ){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un genero");
+            return; //no sigue
+        }
+            
+        if( masculino.isSelected() == true )
+            JOptionPane.showMessageDialog(this, "Ha seleccionado Masculino");
+        
+        if( femenino.isSelected() == true )
+            JOptionPane.showMessageDialog(this, "Ha seleccionado Femenino");
+    }//GEN-LAST:event_botonPruebaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,12 +217,13 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton azul;
+    private javax.swing.JButton botonPrueba;
     private javax.swing.ButtonGroup color;
+    private javax.swing.JRadioButton femenino;
     private javax.swing.ButtonGroup genero;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton masculino;
+    private javax.swing.JRadioButton rojo;
+    private javax.swing.JRadioButton verde;
     // End of variables declaration//GEN-END:variables
 }
