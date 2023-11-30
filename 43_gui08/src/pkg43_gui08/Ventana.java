@@ -15,6 +15,26 @@ public class Ventana extends javax.swing.JFrame {
     //variables globales (dentro de una class se llaman atributos)
     DefaultListModel modelo; //variable que va a server de modelo para lista
     
+    //metodos
+    public void sumario(){
+        //metodo que recorrer la lista para obtener cuantas frutas tienen
+        //menos de 5 char, 5 char o mas y muestra cuantas frutas tenemos en total
+        //variable contador
+        int frutasMenos5 = 0, frutas5Mas = 0;
+        //recorrer el modelo, analizando item por item
+        for( int i = 0; i < modelo.size(); i++ ){
+            //analizar cada item
+            if( modelo.getElementAt(i).toString().trim().length() < 5 )
+                frutasMenos5++;
+            else
+               frutas5Mas++; 
+        }
+        //colocar los resultados en los label
+        txtContador.setText( "frutas: "+String.valueOf(modelo.size()) );
+        txtFrutasMenor5.setText( "menos de 5 char: "+String.valueOf(frutasMenos5) );
+        txtFrutas5Mas.setText( "mas de 5 char: "+String.valueOf(frutas5Mas) );
+    }
+    
     /**
      * Creates new form Ventana
      */
@@ -37,6 +57,11 @@ public class Ventana extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        txtFruta = new javax.swing.JTextField();
+        btnAgregar2 = new javax.swing.JButton();
+        txtContador = new javax.swing.JLabel();
+        txtFrutasMenor5 = new javax.swing.JLabel();
+        txtFrutas5Mas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerardo 20012002049");
@@ -72,27 +97,62 @@ public class Ventana extends javax.swing.JFrame {
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        txtFruta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        btnAgregar2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnAgregar2.setText("Agregar");
+        btnAgregar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar2ActionPerformed(evt);
+            }
+        });
+
+        txtContador.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtContador.setText("jLabel1");
+
+        txtFrutasMenor5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFrutasMenor5.setText("jLabel1");
+
+        txtFrutas5Mas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFrutas5Mas.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFruta, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                        .addComponent(btnAgregar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(449, 449, 449)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
+                        .addGap(4, 4, 4)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                    .addComponent(txtContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFrutasMenor5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFrutas5Mas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -100,6 +160,11 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -108,9 +173,13 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 158, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(txtContador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFrutasMenor5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFrutas5Mas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))))
         );
 
         pack();
@@ -126,6 +195,7 @@ public class Ventana extends javax.swing.JFrame {
         modelo.addElement("Sandia");
         //asignar el modelo al JList llamado lista
         lista.setModel(modelo);
+        sumario();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -139,13 +209,62 @@ public class Ventana extends javax.swing.JFrame {
             //si la cadena enviada su longitud es mayor que cero la agregamos a la lista
             if( cadena.trim().length() > 0 ){
                 modelo.addElement(cadena);
+                sumario();
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+        //Modificar item seleccionado
+        //si no ha seleccionado item entonces no hacer nada
+        //cuando se ha seleccionado un Item el getSelecteIndex es mayor o igual
+        //que cero
+        if( lista.getSelectedIndex() >= 0 ){
+            String x;
+            x = JOptionPane.showInputDialog("Digitar nuevo valor",lista.getSelectedValue());
+            
+            if( x != null ){
+                if( x.trim().length() > 0 ){
+                    //alterar el elemento seleccionado desde el modelo
+                    modelo.setElementAt(x, lista.getSelectedIndex());
+                    sumario();
+                }
+            }
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar2ActionPerformed
+        if( txtFruta.getText().trim().length() > 0 ){
+            modelo.addElement( txtFruta.getText() );
+            //limpiar la caja de texto
+            txtFruta.setText("");
+            sumario();
+        }
+    }//GEN-LAST:event_btnAgregar2ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //eliminar un item
+        //solo si hay item seleccionado
+        if( lista.getSelectedIndex() >= 0 ){
+            //preguntar al usuario si desea borrar
+            int numeroBoton;
+            numeroBoton = JOptionPane.showConfirmDialog(this, "Desea eliminar el item?");
+            //el boton 0 es Yes o Si
+            if( numeroBoton == 0 ){
+                modelo.removeElementAt( lista.getSelectedIndex() );
+                sumario();
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        int boton;
+        boton = JOptionPane.showConfirmDialog(this, "Desea limpiar todo?");
+        if( boton == 0 ){
+            modelo.removeAllElements();
+            sumario();
+        }
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,10 +303,15 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar2;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lista;
+    private javax.swing.JLabel txtContador;
+    private javax.swing.JTextField txtFruta;
+    private javax.swing.JLabel txtFrutas5Mas;
+    private javax.swing.JLabel txtFrutasMenor5;
     // End of variables declaration//GEN-END:variables
 }
