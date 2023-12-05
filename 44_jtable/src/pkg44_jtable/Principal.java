@@ -61,9 +61,19 @@ public class Principal extends javax.swing.JFrame {
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminar.setText("Borrar");
@@ -135,6 +145,53 @@ public class Principal extends javax.swing.JFrame {
         String renglon[] = {"M0001","Firualis","3","Filomeno Colinas","Perro"};
         modelo.addRow(renglon);
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        //crear una instancia de Detalle
+        Detalle d = new Detalle(this,true);
+        d.setVisible(true); //mandar a dibujar
+        //el siguiente codigo se ejecuta cuando se cierra/oculta
+        //el JDialog de Detalle
+        //si el rootPane no es null entonces es porque se hizo click
+        //en el boton Aceptar
+        if( d.getRootPane() != null ){
+            //agregar el registro al JTable
+            String renglon[] = {
+                d.txtCodigo.getText(),
+                d.txtNombre.getText(),
+                d.txtEdad.getText(),
+                d.txtPropietario.getText(),
+                d.txtEspecie.getText()
+            };
+            modelo.addRow(renglon);
+            //destruir el Detalle
+            d.dispose();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        //si no se ha seleccionado una fila no continua
+        if( tabla.getSelectedRow() == -1 ) return;
+        //crear un form de Detalle y llenarlo con lo que esta en el renglon
+        Detalle d = new Detalle(this,true);
+        d.txtCodigo.setText( tabla.getValueAt( tabla.getSelectedRow(), 0).toString() );
+        d.txtNombre.setText( tabla.getValueAt( tabla.getSelectedRow(), 1).toString() );
+        d.txtEdad.setText( tabla.getValueAt( tabla.getSelectedRow(), 2).toString() );
+        d.txtPropietario.setText( tabla.getValueAt( tabla.getSelectedRow(), 3).toString() );
+        d.txtEspecie.setText( tabla.getValueAt( tabla.getSelectedRow(), 4).toString() );
+        d.setVisible(true);
+        if( d.getRootPane() != null ){
+            //hizo click en Aceptar
+            //actualizar la fila seleccionada
+            tabla.setValueAt(d.txtCodigo.getText(),tabla.getSelectedRow(), 0);
+            tabla.setValueAt(d.txtNombre.getText(),tabla.getSelectedRow(), 1);
+            tabla.setValueAt(d.txtEdad.getText(),tabla.getSelectedRow(), 2);
+            tabla.setValueAt(d.txtPropietario.getText(),tabla.getSelectedRow(), 3);
+            tabla.setValueAt(d.txtEspecie.getText(),tabla.getSelectedRow(), 4);
+            //termino de actualizar, destruimos el Detalle
+            d.dispose();
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ package pkg44_jtable;
  *
  * @author Gerardo Portillo
  */
+import javax.swing.JOptionPane;
 public class Detalle extends javax.swing.JDialog {
 
     /**
@@ -46,9 +47,19 @@ public class Detalle extends javax.swing.JDialog {
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Código:");
@@ -143,6 +154,45 @@ public class Detalle extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        //validar los contenidos de las cajas de texto
+        try{
+            //codigo, nombre de mascota, especie, propietario
+            //la edad debe ser >= 0
+            if( txtCodigo.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Codigo debe ir lleno.");
+                return;
+            }
+            if( txtNombre.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Nombre debe ir lleno.");
+                return;
+            }
+            if( txtPropietario.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Propietario debe ir lleno.");
+                return;
+            }
+            if( txtEspecie.getText().trim().length() == 0 ){
+                JOptionPane.showMessageDialog(this, "Especie debe ir llena.");
+                return;
+            }
+            if( Integer.parseInt(txtEdad.getText()) < 0 ){
+                JOptionPane.showMessageDialog(this, "Edad debe ser >= 0.");
+                return;
+            }
+            //si llego aqui es porque supero las validaciones, entonces ocultamos
+            //este JDialog sin destruirlo
+            this.setVisible(false);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Revise los datos.");
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        //destruir el JDialog
+        this.setRootPane(null); //apuntar el contendor de GUI a nulo
+        this.dispose(); //enviar este JDialog a destruccion
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,10 +243,10 @@ public class Detalle extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtEdad;
-    private javax.swing.JTextField txtEspecie;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPropietario;
+    public javax.swing.JTextField txtCodigo;
+    public javax.swing.JTextField txtEdad;
+    public javax.swing.JTextField txtEspecie;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtPropietario;
     // End of variables declaration//GEN-END:variables
 }
