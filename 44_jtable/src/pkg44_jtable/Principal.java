@@ -9,6 +9,7 @@ package pkg44_jtable;
  *
  * @author Gerardo Portillo
  */
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel; //importar el modelo
 public class Principal extends javax.swing.JFrame {
     //crear una variable global (atributo) para manejar el modelo
@@ -77,9 +78,19 @@ public class Principal extends javax.swing.JFrame {
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminar.setText("Borrar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,6 +203,34 @@ public class Principal extends javax.swing.JFrame {
             d.dispose();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //verificar si ha seleccionado fila
+        if( tabla.getSelectedRow() == -1 ) return;
+        
+        //preguntar al usuario antes de eliminar
+        int boton = JOptionPane.showConfirmDialog(this, "Desea eliminar el item?");
+        if( boton == 0 ){
+            //borrar la fila
+            modelo.removeRow( tabla.getSelectedRow() );
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        //preguntar al usuario antes de limpiar
+        int boton = JOptionPane.showConfirmDialog(this, "Desea limpiar todo?");
+        if( boton == 0 ){
+            boton = JOptionPane.showConfirmDialog(this, "Esta seguro?");
+            if( boton == 0 ){
+                boton = JOptionPane.showConfirmDialog(this, "Realmente seguro, 100%?");
+                if( boton == 0 ){
+                    modelo.getDataVector().removeAllElements();
+                    //refrescar la GUI de la tabla
+                    tabla.updateUI();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
